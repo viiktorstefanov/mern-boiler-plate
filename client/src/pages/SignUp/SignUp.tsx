@@ -39,7 +39,6 @@ const SignUp: React.FC = () => {
             console.log(credentials);
           }}
         >
-          {/* errors, touched, */}
           {({ isValid, values, errors, touched }) => (
             <Form>
               <Input
@@ -49,7 +48,7 @@ const SignUp: React.FC = () => {
                 placeholder="Email Address"
                 className=""
               />
-              {errors && errors.email && touched.email &&  <p className="text-red-600 text-sm  mt-2 mb-2">{errors.email}</p>}
+
               <Input
                 name="username"
                 Icon={UserIcon}
@@ -57,7 +56,6 @@ const SignUp: React.FC = () => {
                 placeholder="Username"
                 className=""
               />
-              {errors && errors.username && touched.username && <p className="text-red-600 text-sm  mt-2">{errors.username}</p>}
               <Input
                 name="password"
                 Icon={LockIcon}
@@ -65,7 +63,8 @@ const SignUp: React.FC = () => {
                 placeholder="Password"
                 className=""
               />
-              
+              {errors && errors.email && touched.email &&  <p className="text-red-600 text-sm  mt-2 mb-2">{errors.email}</p>}
+              {errors && errors.username && touched.username && <p className="text-red-600 text-sm  mt-2">{errors.username}</p>}
               <PasswordMeter password={values.password} />
               <SubmitButton type="submit" disabled={!isValid} isLoading={false} title={'Sign Up'}/>
             </Form>
