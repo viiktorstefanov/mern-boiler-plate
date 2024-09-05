@@ -2,7 +2,7 @@ import React from 'react';
 
 const MobileNavigation: React.FC = () => {
   return (
-    <div>
+    <div className='w-full'>
       
     </div>
   )
