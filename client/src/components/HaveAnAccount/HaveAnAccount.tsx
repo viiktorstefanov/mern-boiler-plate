@@ -6,7 +6,7 @@ const HaveAnAccount:React.FC = () => {
     <div className="px-8 py-4 bg-gray-900 bg-opacity-50 flex justify-center">
     <p className="text-sm text-gray-400">
       Already have an account?{" "}
-      <Link to={"/login"} className="text-white hover:underline">
+      <Link to={"/auth/signin"} className="text-white hover:underline">
         Login
       </Link>
     </p>
