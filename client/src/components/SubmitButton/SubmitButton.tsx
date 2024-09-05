@@ -13,7 +13,7 @@ const SubmitButton: React.FC<SubmitButtonProps> = ( { type, disabled, title, isL
   return (
     <motion.button
     className="mt-5 w-full py-3 px-4 bg-gray-800 text-white 
-            font-bold rounded-lg shadow-lg focus:cursor-pointer transition duration-200 cursor-pointer"
+            font-bold rounded-lg shadow-lg focus:cursor-pointer transition duration-200 cursor-pointer disabled:opacity-50"
     whileHover={{ scale: 1.02 }}
     whileTap={{ scale: 0.98 }}
     type={type}

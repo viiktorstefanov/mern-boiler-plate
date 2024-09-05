@@ -82,7 +82,7 @@ const SignIn: React.FC = () => {
       <div className='px-8 py-4 bg-gray-900 bg-opacity-50 flex justify-center'>
 				<p className='text-sm text-gray-400'>
 					Don't have an account?{" "}
-					<Link to='/auth/signup' className='text-white hover:underline'>
+					<Link to='/auth/register' className='text-white hover:underline'>
 						Sign up
 					</Link>
 				</p>
