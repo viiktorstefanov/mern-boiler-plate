@@ -13,11 +13,12 @@ import { CustomRequest } from "../middlewares/verifyToken";
 const HOST = process.env.HOST;
 
 const signUp = async (req: Request, res: Response) => {
+  
     //validation missing
-  const { email, password, name } = req.body;
-
+  const { email, password, username } = req.body;
+  
   try {
-    if (!email || !password || !name) {
+    if (!email || !password || !username) {
       throw new Error("All fields are required");
     }
 
@@ -35,7 +36,7 @@ const signUp = async (req: Request, res: Response) => {
     const user = new User({
         email,
         password: hashedPassword,
-        name,
+        username,
         verificationToken,
         verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000 // 24 hours 
     });
@@ -54,6 +55,12 @@ const signUp = async (req: Request, res: Response) => {
         user: {
             ...userData,
             password: undefined,
+            verificationToken: undefined,
+            verificationTokenExpiresAt: undefined,
+            lastLogin: undefined,
+            createdAt: undefined,
+            updatedAt: undefined,
+            __v: undefined,
         }
     });
 
@@ -111,6 +118,12 @@ const signIn = async (req: Request, res: Response) => {
       user: {
         ...userData,
         password: undefined,
+        verificationToken: undefined,
+        verificationTokenExpiresAt: undefined,
+        lastLogin: undefined,
+        createdAt: undefined,
+        updatedAt: undefined,
+        __v: undefined,
       }
     });
 
@@ -177,7 +190,7 @@ const verifyEmail = async (req: Request, res: Response) => {
 		user.verificationTokenExpiresAt = undefined;
 		await user.save();
 
-		await sendWelcomeEmail(user.email, user.name);
+		await sendWelcomeEmail(user.email, user.username);
 
     const { ...userData } = user.toObject();
 

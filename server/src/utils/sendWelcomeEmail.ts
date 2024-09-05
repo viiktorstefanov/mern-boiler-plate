@@ -1,3 +1,3 @@
-export const sendWelcomeEmail = async (email: string, name: string) => {
+export const sendWelcomeEmail = async (email: string, username: string) => {
 
 };

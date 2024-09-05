@@ -1,6 +1,6 @@
 export type User = {
-    _id: string,
-    name: string,
-    isVerified: boolean,
     email: string,
+    username: string,
+    isVerified: boolean,
+    _id: string,
 };

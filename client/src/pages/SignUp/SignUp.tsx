@@ -11,15 +11,44 @@ import { signUpSchema } from "../../validations/signUpSchema";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import HaveAnAccount from "../../components/HaveAnAccount/HaveAnAccount";
 import PasswordMeter from "../../components/PasswordMeter/PasswordMeter";
+import { register } from "../../services/authService";
+import { useDispatch } from "react-redux";
+import { setError, setIsLoading, setUser } from "../../state/auth/authSlice";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../state/store";
+
 
 type FormValues = {
-  email: string,
-  password: string,
-  username: string,
-}
+  email: string;
+  password: string;
+  username: string;
+};
 
 const SignUp: React.FC = () => {
-  const initialValues: FormValues = { email: '', password: '', username: '' };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const initialValues: FormValues = { email: "", password: "", username: "" };
+  const isLoading = useSelector((state: RootState) => state.auth.isLoading);
+
+  const onSubmit = async (credentials: FormValues) => {
+    try {
+      dispatch(setIsLoading(true));
+      const response = await register(credentials);
+      const user = response.data.user;
+      dispatch(setUser(user));
+      navigate('/');
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error) && error.response) {
+        dispatch(setError(error.response.data.message));
+      } else {
+        dispatch(setError('An unexpected error occurred'));
+      }
+    } finally {
+      dispatch(setIsLoading(false));      
+    }
+  };
 
   return (
     <motion.section
@@ -35,9 +64,7 @@ const SignUp: React.FC = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={signUpSchema}
-          onSubmit={(credentials) => {
-            console.log(credentials);
-          }}
+          onSubmit={onSubmit}
         >
           {({ isValid, values, errors, touched }) => (
             <Form>
@@ -63,10 +90,21 @@ const SignUp: React.FC = () => {
                 placeholder="Password"
                 className=""
               />
-              {errors && errors.email && touched.email &&  <p className="text-red-600 text-sm  mt-2 mb-2">{errors.email}</p>}
-              {errors && errors.username && touched.username && <p className="text-red-600 text-sm  mt-2">{errors.username}</p>}
+              {errors && errors.email && touched.email && (
+                <p className="text-red-600 text-sm  mt-2 mb-2">
+                  {errors.email}
+                </p>
+              )}
+              {errors && errors.username && touched.username && (
+                <p className="text-red-600 text-sm  mt-2">{errors.username}</p>
+              )}
               <PasswordMeter password={values.password} />
-              <SubmitButton type="submit" disabled={!isValid} isLoading={false} title={'Sign Up'}/>
+              <SubmitButton
+                type="submit"
+                disabled={!isValid}
+                isLoading={isLoading}
+                title={"Sign Up"}
+              />
             </Form>
           )}
         </Formik>
