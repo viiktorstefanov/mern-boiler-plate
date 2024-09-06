@@ -5,6 +5,9 @@ import SignIn from "../pages/SignIn/SignIn";
 import EmailVerification from "../pages/EmailVerification/EmailVerification";
 import VerifiedRoute from "../guards/isVerifiedGuard";
 import NotFound from "../pages/NotFound/NotFound";
+import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
+
+//add route if user is loged in to redirect to home page
 
 const AppRoutes: React.FC = () => {
   return (
@@ -18,6 +21,7 @@ const AppRoutes: React.FC = () => {
               <Route path="/register" element={<SignUp />} />
               <Route path="/login" element={<SignIn />} />
               <Route path="/verify-email" element={<EmailVerification />} />
+              <Route path='/forgot-password' element={<ForgotPassword />} />
             </Routes>
           </VerifiedRoute>
         }

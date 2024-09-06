@@ -29,13 +29,19 @@ const login = async (data: LoginData): Promise<{ data: { user: User, message: st
 
 const register = async (data: RegisterData): Promise<{ data: { user: User, message: string, success: boolean } }> => await axios.post(`${HOST}${endpoints.register}`, data);
 
+const logout = async () => await axios.post(`${HOST}${endpoints.logout}`);
+
 const verifyEmail = async (code: string): Promise<{ data: { user: User, message: string, success: boolean } }> => await axios.post(`${HOST}${endpoints.verify}`, { code });
+
+const forgotPassword = async (email: string) => await axios.post(`${HOST}${endpoints.forgot}`, { email });
 
 const checkAuth = async (): Promise<{ data: { user: User, message: string, success: boolean } }> => await axios.get(`${HOST}${endpoints.check}`);
 
 export {
     login,
     register,
+    logout,
     verifyEmail,
+    forgotPassword,
     checkAuth
 }

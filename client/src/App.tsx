@@ -9,9 +9,12 @@ import { RootState } from "./state/store";
 import notification from "./services/notification";
 import Loader from "./components/Loader/Loader";
 import useAuthCheck from "./hooks/useAuthCheck";
+import { useDispatch } from "react-redux";
+import { clearError } from "./state/auth/authSlice";
 
 
 function App() {
+  const dispatch = useDispatch();
   const checkAuthentication = useAuthCheck();
   const error = useSelector((state: RootState) => state.auth.error);
 
@@ -23,12 +26,13 @@ function App() {
     if(error) {
       notification.error(error);
     }
+    dispatch(clearError());
   }, [error]);
 
   return (
    <main className="min-h-screen bg-slate-400 overflow-hidden flex flex-col items-center justify-center relative">
-      <Loader />
       <ToastContainer />
+      <Loader />
       <Header />
       <AppRoutes />
       <Footer />

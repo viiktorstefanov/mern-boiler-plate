@@ -39,6 +39,10 @@ p, li {
   text-wrap: pretty;
 }
 
+.Toastify {
+  z-index: 10000000000000;
+}
+
 .Toastify__toast-body {
   font-size: 1rem;
 }
