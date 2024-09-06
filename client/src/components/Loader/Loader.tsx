@@ -1,9 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import PulseLoader from "react-spinners/PulseLoader";
+import { RootState } from "../../state/store";
 
 const Loader: React.FC = () => {
 
-    const isLoading = false;
+    const authStatus = useSelector((state: RootState) => state.auth.status);
+
+    const isLoading = authStatus === 'loading';
 
   return (
     <>

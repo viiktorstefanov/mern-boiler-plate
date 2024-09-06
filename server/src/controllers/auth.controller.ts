@@ -95,13 +95,13 @@ const signIn = async (req: Request, res: Response) => {
     const user = await User.findOne({ email });
 
     if(!user) {
-      return res.status(400).json({ success: false, message: "Invalid credentials" });
+      return res.status(400).json({ success: false, message: "Incorrect email or password" });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if(!isPasswordValid) {
-      return res.status(400).json({ success: false, message: 'Invalid credentials'});
+      return res.status(400).json({ success: false, message: 'Incorrect email or password'});
     };
 
     const token = generateToken(user._id.toString());
@@ -266,7 +266,18 @@ const checkAuth = async (req: CustomRequest, res: Response) => {
       return res.status(400).json({ success: false, message: "User not found" });
     };
 
-    res.status(200).json({ success: true, user });
+    const { ...userData } = user.toObject();
+
+    res.status(200).json({ success: true, user: {
+      ...userData,
+        password: undefined,
+        verificationToken: undefined,
+        verificationTokenExpiresAt: undefined,
+        lastLogin: undefined,
+        createdAt: undefined,
+        updatedAt: undefined,
+        __v: undefined,
+    } });
 
   } catch (error: any) {
     console.log("Error in checkAuth ", error);

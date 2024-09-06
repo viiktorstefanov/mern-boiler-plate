@@ -8,9 +8,10 @@ const endpoints = {
     register: '/api/auth/signup',
     login: '/api/auth/login',
     logout: '/api/auth/logout',
-    verify: '/verify-email',
-    reset: '/reset-password/:token',
-    forgot: '/forgot-password'
+    verify: '/api/auth/verify-email',
+    reset: '/api/auth/reset-password/:token',
+    forgot: '/api/auth/forgot-password',
+    check: '/api/auth'
 };
 
 type LoginData = {
@@ -30,8 +31,11 @@ const register = async (data: RegisterData): Promise<{ data: { user: User, messa
 
 const verifyEmail = async (code: string): Promise<{ data: { user: User, message: string, success: boolean } }> => await axios.post(`${HOST}${endpoints.verify}`, { code });
 
+const checkAuth = async (): Promise<{ data: { user: User, message: string, success: boolean } }> => await axios.get(`${HOST}${endpoints.check}`);
+
 export {
     login,
     register,
     verifyEmail,
+    checkAuth
 }

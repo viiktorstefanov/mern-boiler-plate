@@ -8,10 +8,16 @@ import { useSelector } from "react-redux";
 import { RootState } from "./state/store";
 import notification from "./services/notification";
 import Loader from "./components/Loader/Loader";
+import useAuthCheck from "./hooks/useAuthCheck";
+
 
 function App() {
-
+  const checkAuthentication = useAuthCheck();
   const error = useSelector((state: RootState) => state.auth.error);
+
+  useEffect(() => {
+    checkAuthentication();
+  }, [checkAuthentication]);
 
   useEffect(() => {
     if(error) {

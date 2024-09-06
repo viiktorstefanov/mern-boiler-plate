@@ -5,9 +5,10 @@ import { verifyEmail } from "../../services/authService";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setError, setIsLoading, setUser } from "../../state/auth/authSlice";
+import { setAuth, setError, setIsLoading } from "../../state/auth/authSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
+import notification from "../../services/notification";
 
 type CodeArray = [string, string, string, string, string, string];
 
@@ -64,10 +65,11 @@ const EmailVerification: React.FC = () => {
             dispatch(setIsLoading(true));
             const response = await verifyEmail(verificationCode);
             const user = response.data.user;
-            dispatch(setUser(user));
+            dispatch(setAuth(user));
             navigate('/');
+            notification.success('Email verified successfully');
             
-		} catch (error) {
+		} catch (error: unknown) {
             if (axios.isAxiosError(error) && error.response) {
                 dispatch(setError(error.response.data.message));
               } else {

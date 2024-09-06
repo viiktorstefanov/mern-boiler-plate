@@ -6,7 +6,8 @@ type AuthState = {
     isLoading: boolean,
     error: string | null,
     isAuthenticated: boolean,
-    isCheckingAuth: boolean,
+    isVerified: boolean,
+    status: 'idle' | 'loading' | 'succeeded' | 'failed',
 };
 
 const initialState: AuthState = {
@@ -14,7 +15,8 @@ const initialState: AuthState = {
     isLoading: false,
     error: null,
     isAuthenticated: false,
-    isCheckingAuth: true,
+    isVerified: false,
+    status: 'idle'
 };
 
 const authSlice = createSlice({
@@ -34,9 +36,16 @@ const authSlice = createSlice({
         },
         setError: (state, action: PayloadAction<string>) => {
             state.error = action.payload;
-        }
+        },
+        setAuth: (state, action: PayloadAction<User>) => {
+            state.user = action.payload;
+            state.isVerified = true;
+        },
+        setStatus: (state, action: PayloadAction<'idle' | 'loading' | 'succeeded' | 'failed'>) => {
+            state.status = action.payload;
+        },
     }
 });
 
-export const { setUser, clearUser, setError, setIsLoading } = authSlice.actions;
+export const { setUser, clearUser, setError, setIsLoading, setAuth, setStatus } = authSlice.actions;
 export default authSlice.reducer;
