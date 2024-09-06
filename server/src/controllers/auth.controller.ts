@@ -199,7 +199,13 @@ const verifyEmail = async (req: Request, res: Response) => {
 			message: "Email verified successfully",
 			user: {
 				...userData,
-				password: undefined,
+        password: undefined,
+        verificationToken: undefined,
+        verificationTokenExpiresAt: undefined,
+        lastLogin: undefined,
+        createdAt: undefined,
+        updatedAt: undefined,
+        __v: undefined,
 			},
 		});
 	} catch (error) {

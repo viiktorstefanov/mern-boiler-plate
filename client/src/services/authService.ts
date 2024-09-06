@@ -28,7 +28,10 @@ const login = async (data: LoginData): Promise<{ data: { user: User, message: st
 
 const register = async (data: RegisterData): Promise<{ data: { user: User, message: string, success: boolean } }> => await axios.post(`${HOST}${endpoints.register}`, data);
 
+const verifyEmail = async (code: string): Promise<{ data: { user: User, message: string, success: boolean } }> => await axios.post(`${HOST}${endpoints.verify}`, { code });
+
 export {
     login,
-    register
+    register,
+    verifyEmail,
 }

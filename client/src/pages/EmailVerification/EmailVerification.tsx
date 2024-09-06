@@ -1,15 +1,24 @@
 import React, { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
+import { verifyEmail } from "../../services/authService";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setError, setIsLoading, setUser } from "../../state/auth/authSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "../../state/store";
 
 type CodeArray = [string, string, string, string, string, string];
 
 const EmailVerification: React.FC = () => {
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const [code, setCode] = useState<CodeArray>(["", "", "", "", "", ""]);
 	const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-    const isLoading = false;
-    const errors = null;
+    const isLoading = useSelector((state: RootState) => state.auth.isLoading);
 
     const onChange = (index: number, value: string) => {
         const newCode: CodeArray = [...code];
@@ -52,12 +61,21 @@ const EmailVerification: React.FC = () => {
 		e.preventDefault();
 		const verificationCode = code.join("");
 		try {
-            console.log(verificationCode);
+            dispatch(setIsLoading(true));
+            const response = await verifyEmail(verificationCode);
+            const user = response.data.user;
+            dispatch(setUser(user));
+            navigate('/');
             
 		} catch (error) {
-            console.log(error);
-            
-		}
+            if (axios.isAxiosError(error) && error.response) {
+                dispatch(setError(error.response.data.message));
+              } else {
+                dispatch(setError('An unexpected error occurred'));
+              }
+		} finally {
+            dispatch(setIsLoading(false)); 
+        }
 	};
 
     useEffect(() => {
@@ -95,8 +113,8 @@ const EmailVerification: React.FC = () => {
 							/>
 						))}
 					</div>
-					{errors && <p className='text-red-500 font-semibold mt-2'>{errors}</p>}
-                    <SubmitButton type="submit" disabled={isLoading || code.some((digit) => !digit)} isLoading={false} title="Verify Email"/>
+					{/* {errors && <p className='text-red-500 font-semibold mt-2'>{errors}</p>} */}
+                    <SubmitButton type="submit" disabled={isLoading || code.some((digit) => !digit)} isLoading={isLoading} title="Verify Email"/>
 				</form>
       </motion.div>
     </section>
