@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "./state/store";
 import notification from "./services/notification";
+import Loader from "./components/Loader/Loader";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
 
   return (
    <main className="min-h-screen bg-slate-400 overflow-hidden flex flex-col items-center justify-center relative">
+      <Loader />
       <ToastContainer />
       <Header />
       <AppRoutes />
