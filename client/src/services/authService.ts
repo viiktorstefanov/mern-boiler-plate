@@ -9,7 +9,7 @@ const endpoints = {
     login: '/api/auth/login',
     logout: '/api/auth/logout',
     verify: '/api/auth/verify-email',
-    reset: '/api/auth/reset-password/:token',
+    reset: '/api/auth/reset-password',
     forgot: '/api/auth/forgot-password',
     check: '/api/auth'
 };
@@ -37,11 +37,14 @@ const forgotPassword = async (email: string) => await axios.post(`${HOST}${endpo
 
 const checkAuth = async (): Promise<{ data: { user: User, message: string, success: boolean } }> => await axios.get(`${HOST}${endpoints.check}`);
 
+const resetPassword = async (token: string, password: string) => await axios.post(`${HOST}${endpoints.reset}/${token}`, password);
+
 export {
     login,
     register,
     logout,
     verifyEmail,
     forgotPassword,
-    checkAuth
+    checkAuth,
+    resetPassword
 }

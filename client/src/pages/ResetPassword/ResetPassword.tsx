@@ -1,9 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
-import SignInForm from "../../components/SignInForm/SignInForm";
-import NotHaveAccount from "../../components/NotHaveAccount/NotHaveAccount";
+import { useParams } from "react-router-dom";
+import ResetPasswordForm from "../../components/ResetPasswordForm/ResetPasswordForm";
 
-const SignIn: React.FC = () => {
+const ResetPassword: React.FC = () => {
+  const { token } = useParams();
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 20 }}
@@ -12,15 +14,15 @@ const SignIn: React.FC = () => {
       className="max-w-md w-full bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden"
     >
       <div className="p-8">
-        <h2 className="text-3xl font-bold mb-6 text-center bg-white text-transparent bg-clip-text">
-          Welcome Back
+        <h2 className="text-3xl font-bold mb-6 text-center text-white bg-clip-text">
+          Reset Password
         </h2>
 
-        <SignInForm />
+        {token ? <ResetPasswordForm token={token} /> : null}
+        
       </div>
-      <NotHaveAccount />
     </motion.section>
   );
 };
 
-export default SignIn;
+export default ResetPassword;
