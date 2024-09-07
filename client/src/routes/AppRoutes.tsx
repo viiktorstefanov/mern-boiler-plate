@@ -7,8 +7,7 @@ import VerifiedRoute from "../guards/isVerifiedGuard";
 import NotFound from "../pages/NotFound/NotFound";
 import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "../pages/ResetPassword/ResetPassword";
-
-//add route if user is loged in to redirect to home page
+import IsLoggedGuard from "../guards/isLoggedGuard";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -19,11 +18,11 @@ const AppRoutes: React.FC = () => {
         element={
           <VerifiedRoute>
             <Routes>
-              <Route path="/register" element={<SignUp />} />
-              <Route path="/login" element={<SignIn />} />
+              <Route path="/register" element={<IsLoggedGuard><SignUp /></IsLoggedGuard>} />
+              <Route path="/login" element={<IsLoggedGuard><SignIn /></IsLoggedGuard>} />
               <Route path="/verify-email" element={<EmailVerification />} />
-              <Route path='/forgot-password' element={<ForgotPassword />} />
-              <Route path='/reset-password/:token' element={<ResetPassword />} />
+              <Route path='/forgot-password' element={<IsLoggedGuard><ForgotPassword /></IsLoggedGuard>} />
+              <Route path='/reset-password/:token' element={<IsLoggedGuard><ResetPassword /></IsLoggedGuard>} />
             </Routes>
           </VerifiedRoute>
         }

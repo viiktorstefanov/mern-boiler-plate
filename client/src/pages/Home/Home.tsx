@@ -10,7 +10,7 @@ const Home: React.FC = () => {
     transition={{ duration: 0.5 }}
     className='max-w-md w-full mx-auto mt-10 p-8 bg-gray-900 bg-opacity-80 text-white backdrop-filter backdrop-blur-lg rounded-xl shadow-2xl border border-gray-800'
   >
-    Home Page
+   <h1>HOME PAGE</h1>
   </motion.section>
   )
 }
