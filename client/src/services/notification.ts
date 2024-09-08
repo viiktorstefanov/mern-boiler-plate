@@ -11,6 +11,9 @@ const notification = {
     toast.success(message, {
         position: "top-center",
         theme: "dark",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
     });
   },
 

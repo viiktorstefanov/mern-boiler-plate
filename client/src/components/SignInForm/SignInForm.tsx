@@ -14,6 +14,7 @@ import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import Input from "../../components/Input/Input";
 
 import { login } from "../../services/authService";
+import notification from '../../services/notification';
 
 type FormValues = {
     email: string;
@@ -32,6 +33,7 @@ const SignInForm: React.FC = () => {
           const response = await login(credentials);
           const user = response.data.user;
           dispatch(setUser(user));
+          notification.success('Login successful');
           navigate('/');
         } catch(error: unknown) {
           if (axios.isAxiosError(error) && error.response) {

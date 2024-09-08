@@ -19,6 +19,7 @@ import SubmitButton from "../SubmitButton/SubmitButton";
 import { setError, setIsLoading, setUser } from "../../state/auth/authSlice";
 import { register } from "../../services/authService";
 import { signUpSchema } from "../../validations/signUpSchema";
+import notification from "../../services/notification";
 
 type FormValues = {
   email: string;
@@ -38,6 +39,7 @@ const SignUpForm: React.FC = () => {
       const response = await register(credentials);
       const user = response.data.user;
       dispatch(setUser(user));
+      notification.success('You are now signed in');
       navigate("/");
     } catch (error: unknown) {
       if (axios.isAxiosError(error) && error.response) {

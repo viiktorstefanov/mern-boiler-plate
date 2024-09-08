@@ -22,14 +22,14 @@ function App() {
 
   useEffect(() => {
     checkAuthentication();
-  }, []);
+  }, [checkAuthentication]);
 
   useEffect(() => {
     if(error) {
       notification.error(error);
     }
     dispatch(clearError());
-  }, [error]);
+  }, [error, dispatch]);
 
   return (
    <main className="min-h-screen bg-slate-400 overflow-hidden flex flex-col items-center justify-center relative">

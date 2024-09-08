@@ -10,6 +10,7 @@ import ResetPassword from "../pages/ResetPassword/ResetPassword";
 
 import VerifiedRoute from "../guards/isVerifiedGuard";
 import IsLoggedGuard from "../guards/isLoggedGuard";
+import Logout from "../components/Logout/Logout";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -22,6 +23,7 @@ const AppRoutes: React.FC = () => {
             <Routes>
               <Route path="/register" element={<IsLoggedGuard><SignUp /></IsLoggedGuard>} />
               <Route path="/login" element={<IsLoggedGuard><SignIn /></IsLoggedGuard>} />
+              <Route path="/logout" element={<Logout /> } />
               <Route path="/verify-email" element={<EmailVerification />} />
               <Route path='/forgot-password' element={<IsLoggedGuard><ForgotPassword /></IsLoggedGuard>} />
               <Route path='/reset-password/:token' element={<IsLoggedGuard><ResetPassword /></IsLoggedGuard>} />
