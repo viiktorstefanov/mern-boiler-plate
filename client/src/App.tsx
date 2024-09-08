@@ -22,7 +22,7 @@ function App() {
 
   useEffect(() => {
     checkAuthentication();
-  }, [checkAuthentication]);
+  }, []);
 
   useEffect(() => {
     if(error) {
@@ -32,7 +32,7 @@ function App() {
   }, [error, dispatch]);
 
   return (
-   <main className="min-h-screen bg-slate-400 overflow-hidden flex flex-col items-center justify-center relative">
+   <main className="min-h-screen bg-slate-400 overflow-hidden flex flex-col items-center relative">
       <ToastContainer />
       <Loader />
       <Header />

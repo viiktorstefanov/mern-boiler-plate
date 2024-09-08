@@ -1,18 +1,18 @@
-export const NavBarItem = [
+export const NavBarItems = [
     {
-        title: 'Home',
+        label: 'Home',
         route: '/'
     },
     {
-        title: 'Login',
+        label: 'Login',
         route: '/auth/login'
     },
     {
-        title: 'Register',
+        label: 'Register',
         route: '/auth/register'
     },
     {
-        title: 'Logout',
+        label: 'Logout',
         route: '/auth/logout'
     }
 ]
