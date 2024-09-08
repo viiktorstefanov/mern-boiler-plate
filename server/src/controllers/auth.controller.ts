@@ -11,6 +11,9 @@ import { sendResetSuccessEmail } from "../utils/sendResetSuccessEmail";
 import { CustomRequest } from "../middlewares/verifyToken";
 import { signupSchema } from "../validations/signUp.validation";
 import { signInSchema } from "../validations/signIn.validation";
+import { resetPasswordSchema } from "../validations/resetPassword.validation";
+import { forgotPasswordSchema } from "../validations/forgotPassword.validation";
+import { verifyEmailSchema } from "../validations/verifyEmail.validation";
 
 const HOST = process.env.HOST;
 
@@ -22,9 +25,10 @@ const signUp = async (req: Request, res: Response) => {
     return res.status(400).json({ success: false, message: error.details[0].message });;
   }
 
-  const { email, password, username } = value;
   
   try {
+    const { email, password, username } = value;
+
     const userAlreadyExists = await User.findOne({ email });
 
     if (userAlreadyExists) {
@@ -98,9 +102,9 @@ const signIn = async (req: Request, res: Response) => {
     return res.status(400).json({ success: false, message: error.details[0].message });;
   }
 
-  const { email, password } = value;
-
+  
   try {
+    const { email, password } = value;
 
     const user = await User.findOne({ email });
 
@@ -154,9 +158,17 @@ const signIn = async (req: Request, res: Response) => {
 
 const resetPassword = async (req: Request, res: Response) => {
 
+  const { error, value } = resetPasswordSchema.validate(req.body);
+  
+  if (error) {
+    return res.status(400).json({ success: false, message: error.details[0].message });;
+  }
+
+  
   try {
-		const { token } = req.params;
-		const { password } = req.body;
+    const { token } = req.params;
+
+    const { password } = value;
 
 		const user = await User.findOne({
 			resetPasswordToken: token,
@@ -184,8 +196,16 @@ const resetPassword = async (req: Request, res: Response) => {
 };
 
 const verifyEmail = async (req: Request, res: Response) => {
-	const { code } = req.body;
+
+  const { error, value } = verifyEmailSchema.validate(req.body);
+  
+  if (error) {
+    return res.status(400).json({ success: false, message: error.details[0].message });;
+  }
+
 	try {
+    const { code } = value;
+
 		const user = await User.findOne({
 			verificationToken: code,
 			verificationTokenExpiresAt: { $gt: Date.now() },
@@ -225,9 +245,15 @@ const verifyEmail = async (req: Request, res: Response) => {
 };
 
 const forgotPassword = async (req: Request, res: Response) => {
-  const { email } = req.body;
+
+  const { error, value } = forgotPasswordSchema.validate(req.body);
+  
+  if (error) {
+    return res.status(400).json({ success: false, message: error.details[0].message });;
+  }
 
   try {
+    const { email } = value;
 
     const user = await User.findOne( { email });
 
