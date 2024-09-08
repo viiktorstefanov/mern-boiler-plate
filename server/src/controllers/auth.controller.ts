@@ -9,19 +9,22 @@ import { sendPasswordResetEmail } from "../utils/sendPasswordResetEmail";
 import { sendWelcomeEmail } from "../utils/sendWelcomeEmail";
 import { sendResetSuccessEmail } from "../utils/sendResetSuccessEmail";
 import { CustomRequest } from "../middlewares/verifyToken";
+import { signupSchema } from "../validations/signUp.validation";
+import { signInSchema } from "../validations/signIn.validation";
 
 const HOST = process.env.HOST;
 
 const signUp = async (req: Request, res: Response) => {
+
+  const { error, value } = signupSchema.validate(req.body);
   
-    //validation missing
-  const { email, password, username } = req.body;
+  if (error) {
+    return res.status(400).json({ success: false, message: error.details[0].message });;
+  }
+
+  const { email, password, username } = value;
   
   try {
-    if (!email || !password || !username) {
-      throw new Error("All fields are required");
-    }
-
     const userAlreadyExists = await User.findOne({ email });
 
     if (userAlreadyExists) {
@@ -88,7 +91,14 @@ const logout = async (req: Request, res: Response) => {
 };
 
 const signIn = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+
+  const { error, value } = signInSchema.validate(req.body);
+  
+  if (error) {
+    return res.status(400).json({ success: false, message: error.details[0].message });;
+  }
+
+  const { email, password } = value;
 
   try {
 

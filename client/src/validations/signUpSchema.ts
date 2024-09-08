@@ -10,7 +10,7 @@ export const signUpSchema = Validator.object().shape({
                         .matches(/[A-Z]/)
                         .matches(/\d/)
                         .matches(/[!@#$%^&*(),.?":{}|<>]/).required(),
-    username: Validator.string().matches(FORBIDDEN_CHARS_REGEX, 'Username contains forbidden characters (e.g., <, >, ", \', &, etc.)').required("Enter a username to create your account")
+    username: Validator.string().matches(FORBIDDEN_CHARS_REGEX, 'Username contains forbidden characters (e.g., <, >, ", \', &, etc.)').required("Enter a username to create your account").max(30).min(3)
 });
 
    
