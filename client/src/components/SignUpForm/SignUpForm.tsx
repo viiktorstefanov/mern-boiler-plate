@@ -1,20 +1,23 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Formik, Form } from "formik";
 import {
   User as UserIcon,
   Mail as MailIcon,
   Lock as LockIcon,
 } from "lucide-react";
-import { Formik, Form } from "formik";
-import Input from "../Input/Input";
-import PasswordMeter from "../PasswordMeter/PasswordMeter";
-import SubmitButton from "../SubmitButton/SubmitButton";
+
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+
+import Input from "../Input/Input";
+import PasswordMeter from "../PasswordMeter/PasswordMeter";
+import SubmitButton from "../SubmitButton/SubmitButton";
+
 import { setError, setIsLoading, setUser } from "../../state/auth/authSlice";
 import { register } from "../../services/authService";
-import axios from "axios";
 import { signUpSchema } from "../../validations/signUpSchema";
 
 type FormValues = {

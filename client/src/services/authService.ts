@@ -1,5 +1,7 @@
 import axios from "axios";
+
 import { User } from "../types/User";
+
 axios.defaults.withCredentials = true;
 
 const HOST = 'http://localhost:5000';

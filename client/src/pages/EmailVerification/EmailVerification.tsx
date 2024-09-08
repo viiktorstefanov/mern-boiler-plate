@@ -5,15 +5,19 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { motion } from "framer-motion";
-import SubmitButton from "../../components/SubmitButton/SubmitButton";
-import { verifyEmail } from "../../services/authService";
-import axios from "axios";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setAuth, setError, setIsLoading } from "../../state/auth/authSlice";
+
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
+import { useDispatch } from "react-redux";
+import { setAuth, setError, setIsLoading } from "../../state/auth/authSlice";
+
+import axios from "axios";
+import { motion } from "framer-motion";
+
+import SubmitButton from "../../components/SubmitButton/SubmitButton";
+
+import { verifyEmail } from "../../services/authService";
 import notification from "../../services/notification";
 
 type CodeArray = [string, string, string, string, string, string];

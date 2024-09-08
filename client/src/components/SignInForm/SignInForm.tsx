@@ -1,16 +1,19 @@
 import React from 'react';
-import { Mail as MailIcon, Lock as LockIcon } from "lucide-react";
+import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
+import { Mail as MailIcon, Lock as LockIcon } from "lucide-react";
+
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../state/store";
+import { setError, setIsLoading, setUser } from "../../state/auth/authSlice";
+
 import { signInSchema } from "../../validations/signInSchema";
+
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import Input from "../../components/Input/Input";
-import { useDispatch } from "react-redux";
-import axios from "axios";
+
 import { login } from "../../services/authService";
-import { setError, setIsLoading, setUser } from "../../state/auth/authSlice";
-import { RootState } from "../../state/store";
-import { useSelector } from "react-redux";
 
 type FormValues = {
     email: string;

@@ -1,6 +1,8 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
+
+import { motion } from "framer-motion";
+
 import ResetPasswordForm from "../../components/ResetPasswordForm/ResetPasswordForm";
 
 const ResetPassword: React.FC = () => {

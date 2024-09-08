@@ -1,8 +1,10 @@
 
-import { useDispatch } from "react-redux";
-import { setError, setStatus, setUser } from "../state/auth/authSlice";
-import { checkAuth } from "../services/authService";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+
+import { setError, setStatus, setUser } from "../state/auth/authSlice";
+
+import { checkAuth } from "../services/authService";
 
 const useAuthCheck = () => {
     const dispatch = useDispatch();
@@ -16,7 +18,7 @@ const useAuthCheck = () => {
       } catch (error: unknown) {
         dispatch(setStatus('failed'));
         if (axios.isAxiosError(error) && error.response) {
-          dispatch(setError(error.response.data.message));
+          console.log(error.response.data.message);
         } else {
           dispatch(setError('An unexpected error occurred'));
         }

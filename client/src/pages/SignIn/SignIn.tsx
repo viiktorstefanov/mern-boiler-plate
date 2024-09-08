@@ -1,5 +1,7 @@
 import React from "react";
+
 import { motion } from "framer-motion";
+
 import SignInForm from "../../components/SignInForm/SignInForm";
 import NotHaveAccount from "../../components/NotHaveAccount/NotHaveAccount";
 
