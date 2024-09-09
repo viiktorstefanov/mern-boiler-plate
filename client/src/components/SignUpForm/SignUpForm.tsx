@@ -16,7 +16,8 @@ import Input from "../Input/Input";
 import PasswordMeter from "../PasswordMeter/PasswordMeter";
 import SubmitButton from "../SubmitButton/SubmitButton";
 
-import { setError, setIsLoading, setUser } from "../../state/auth/authSlice";
+import {  setUser } from "../../state/auth/authSlice";
+import { setError, setIsLoading } from "../../state/app/appSlice";
 import { register } from "../../services/authService";
 import { signUpSchema } from "../../validations/signUpSchema";
 import notification from "../../services/notification";
@@ -31,7 +32,7 @@ const SignUpForm: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const initialValues: FormValues = { email: "", password: "", username: "" };
-  const isLoading = useSelector((state: RootState) => state.auth.isLoading);
+  const isLoading = useSelector((state: RootState) => state.app.isLoading);
 
   const onSubmit = async (credentials: FormValues) => {
     try {

@@ -5,11 +5,12 @@ type NavBarItemProps = {
   route: string,
   label: string,
   className: string,
+  onClick?: () => void,
 }
 
-const NavBarItem: React.FC<NavBarItemProps> = ( { route, label, className} ) => {
+const NavBarItem: React.FC<NavBarItemProps> = ( { route, label, className, onClick} ) => {
   return (
-    <li className={`${className}`}><Link to={route}>{label}</Link></li>
+    <li className={`${className}`} onClick={onClick}><Link to={route}>{label}</Link></li>
   )
 }
 

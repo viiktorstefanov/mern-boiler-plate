@@ -6,7 +6,8 @@ import { Mail as MailIcon, Lock as LockIcon } from "lucide-react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../state/store";
-import { setError, setIsLoading, setUser } from "../../state/auth/authSlice";
+import { setUser } from "../../state/auth/authSlice";
+import { setError, setIsLoading } from "../../state/app/appSlice";
 
 import { signInSchema } from "../../validations/signInSchema";
 
@@ -25,7 +26,7 @@ const SignInForm: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const initialValues: FormValues = { email: "", password: "" };
-    const isLoading = useSelector((state: RootState) => state.auth.isLoading);
+    const isLoading = useSelector((state: RootState) => state.app.isLoading);
 
     const onSubmit = async (credentials: FormValues) => {
         try {

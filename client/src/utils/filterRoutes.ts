@@ -1,18 +1,19 @@
-import { NavBarItems } from "../constants/navBarItems"
+import { NavBarItems } from "../constants/navBarItems";
 
-export const filterRoutes = (isAuthenticated: boolean) => {
-    const excludeItems = new Set();
+export type navBarItem = {
+  label: string,
+  route: string,
+};
 
-  if (isAuthenticated) {
-    excludeItems.add("Login");
-    excludeItems.add("Register");
-  } else {
-    excludeItems.add("Logout");
-  }
+export const filterRoutes = (isAuthenticated: boolean): navBarItem[] => {
 
-  const filteredRoutes = NavBarItems.filter(
-    (item) => !excludeItems.has(item.label)
-  );
+  const filteredRoutes = NavBarItems.filter(route => {
+    if (!isAuthenticated && route.label === 'Logout') return false;
+    if (isAuthenticated && route.label === 'Login') return false;
+    if (isAuthenticated && route.label === 'Register') return false;
+    return true;
+  });
 
   return filteredRoutes;
-}
+};
+

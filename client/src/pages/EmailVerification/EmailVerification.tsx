@@ -10,7 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
 import { useDispatch } from "react-redux";
-import { setAuth, setError, setIsLoading } from "../../state/auth/authSlice";
+import { setAuth } from "../../state/auth/authSlice";
+import { setError, setIsLoading } from "../../state/app/appSlice";
 
 import axios from "axios";
 import { motion } from "framer-motion";
@@ -28,7 +29,7 @@ const EmailVerification: React.FC = () => {
 
   const [code, setCode] = useState<CodeArray>(["", "", "", "", "", ""]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-  const isLoading = useSelector((state: RootState) => state.auth.isLoading);
+  const isLoading = useSelector((state: RootState) => state.app.isLoading);
 
   const onChange = (index: number, value: string) => {
     const newCode: CodeArray = [...code];
@@ -95,7 +96,7 @@ const EmailVerification: React.FC = () => {
   }, [code]);
 
   return (
-    <section className="max-w-md w-full bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden">
+    <section className="max-w-md w-full bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden mt-10">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

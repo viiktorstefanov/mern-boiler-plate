@@ -6,7 +6,7 @@ import { Formik, Form } from "formik";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "../../state/store";
-import { setError, setIsLoading } from "../../state/auth/authSlice";
+import { setError, setIsLoading } from "../../state/app/appSlice";
 import { forgotPasswordSchema } from "../../validations/forgotPasswordSchema";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import { forgotPassword } from "../../services/authService";
@@ -21,7 +21,7 @@ type ForgotPasswordFormProps = {
 
 const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ( { changeIsSubmitted } ) => {
     const dispatch = useDispatch();
-    const isLoading = useSelector((state: RootState) => state.auth.isLoading);
+    const isLoading = useSelector((state: RootState) => state.app.isLoading);
     const initialValues: FormValues = { email: "" };
 
     const onSubmit = async (credentials: FormValues) => {

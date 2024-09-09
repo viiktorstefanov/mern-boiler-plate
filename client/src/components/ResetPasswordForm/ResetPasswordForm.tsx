@@ -11,7 +11,7 @@ import { Formik, Form } from "formik";
 import { resetPasswordSchema } from "../../validations/resetPasswordSchema";
 import PasswordMeter from "../../components/PasswordMeter/PasswordMeter";
 import notification from "../../services/notification";
-import { setError, setIsLoading } from "../../state/auth/authSlice";
+import { setError, setIsLoading } from "../../state/app/appSlice";
 import { resetPassword } from "../../services/authService";
 
 type FormValues = {
@@ -26,7 +26,7 @@ type FormValues = {
 const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ token }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const isLoading = useSelector((state: RootState) => state.auth.isLoading);
+    const isLoading = useSelector((state: RootState) => state.app.isLoading);
     const initialValues: FormValues = { password: "", confirmPassword: "" };
 
   const onSubmit = async (credentials: FormValues) => {

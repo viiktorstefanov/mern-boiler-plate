@@ -2,7 +2,8 @@
 import axios from "axios";
 import { useDispatch } from "react-redux";
 
-import { setError, setStatus, setUser } from "../state/auth/authSlice";
+import { setUser } from "../state/auth/authSlice";
+import { setError, setStatus } from "../state/app/appSlice";
 
 import { checkAuth } from "../services/authService";
 
