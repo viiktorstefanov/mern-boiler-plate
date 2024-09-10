@@ -10,17 +10,21 @@ This repository contains a full-stack web application with the following technol
 
 This repository contains a RESTful API built using TypeScript, Express, and MongoDB. The project structure is designed to be scalable, modular, and easy to maintain. It includes all the necessary features such as routing, middleware, database operations,services and more.Also has front-end application built with React(TypeScript) and Redux for state managment.
 
+## Authentication <a name="authentication"></a>
+
+This project includes a comprehensive authentication system implemented on both the server and client sides. The server handles user authentication and authorization through JWT (JSON Web Tokens), bcrypt for password hashing, and secure token management using cookies. The front-end incorporates Redux for managing authentication state and Axios for API requests related to user login, registration, and other authentication-related operations.
+
 ## Table of Contents
 
 1. [Overview](#overview)
-2. [Features](#features)
+2. [Authentication](#authentication)
+3. [Features](#features)
    - [Back-End](#back-end)
    - [Front-End](#front-end)
-3. [Getting Started](#getting-started)
+4. [Getting Started](#getting-started)
    - [Clone Repository](#clone)
    - [Installation](#install)
    - [Run the Project](#run)
-4. [Project Structure ](#structure)
 5. [API Endpoints](#endpoints)
 6. [Local Development Setup](#environments)
 7. [Front-End Views](#front-views)
@@ -84,46 +88,6 @@ npm install
 npm run dev 
 for both server and client
 ```
-
-## Project Structure <a name="structure"></a>
-
-├── client                  # React front-end
-│   ├── public              # Public assets
-│   ├── src
-│   │   ├── components      # React components
-│   │   ├── constants       # Constants and configuration values
-│   │   ├── guards          # Components or functions for route protection
-│   │   ├── hooks           # Custom React hooks
-│   │   ├── pages           # Components representing different pages or views
-│   │   ├── routes          # Route definitions and configurations
-│   │   ├── services        # Services for API requests
-│   │   ├── state           # State management (reducers, slices etc.)
-│   │   ├── types           # TypeScript types and interfaces
-│   │   ├── utils           # Utility functions and helper methods
-│   │   ├── validations     # Validation logic and schema definitions
-│   │   ├── App.tsx         # Main App component
-│   │   ├── index.css       # Global CSS styles
-│   │   └── main.tsx        # Entry point for React
-│   │   └── vite-end.d      # Vite configuration or related file
-│   └── package.json        # Client dependencies and scripts
-│
-├── server                  # Express server (API) implementation
-   ├── src
-   │   ├── controllers     # Route handlers that process incoming requests and send responses
-   │   ├── database        # Database configuration and connection setup
-   │   ├── middleware      # Custom Express middleware functions
-   │   ├── models          # Mongoose schemas and models for MongoDB
-   │   ├── routes          # Definitions of API routes and their handlers
-   │   ├── utils           # Utility functions and helper methods
-   │   ├── validations     # Validation logic and input sanitization
-   │   └── index.ts        # Express application setup and configuration
-   └── .env                # Environment variables for configuration (not versioned)
-   └── .gitignore          # Specifies files and directories to be ignored by Git
-   └── nodemon.json        # Configuration for Nodemon (auto-reloading)
-   └── package.json        # Root package for common scripts and dependencies (optional)
-   └── package-lock.json   # Exact dependency versions for consistency (not versioned)
-   └── tsconfig.json       # TypeScript configuration file (not versioned)
-
 
 ## API Endpoints  <a name="endpoints"></a>
 
