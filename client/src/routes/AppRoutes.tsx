@@ -56,9 +56,7 @@ const AppRoutes: React.FC = () => {
                 <Route
                   path="/reset-password/:token"
                   element={
-                    <IsLoggedGuard>
                       <ResetPassword />
-                    </IsLoggedGuard>
                   }
                 />
               </Routes>

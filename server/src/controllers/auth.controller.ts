@@ -75,10 +75,10 @@ const signUp = async (req: Request, res: Response) => {
 
   } catch (error: unknown) {
     if (error instanceof Error) {
-      res.status(400).json({ success: false, message: error.message });
+      res.status(500).json({ success: false, message: error.message });
     } else {
       res
-        .status(400)
+        .status(500)
         .json({ success: false, message: "An unknown error occurred" });
     }
 
@@ -88,10 +88,29 @@ const signUp = async (req: Request, res: Response) => {
 };
 
 const logout = async (req: Request, res: Response) => {
-  res.clearCookie('token');
-  res.status(200).json({ success: true, message: 'Logged out successfully'});
+  try {
+    const token = req.cookies?.token;
 
-  console.log(`User successfully logout.`);
+    if (!token) {
+      return res.status(400).json({ success: false, message: 'No token found' });
+    }
+
+    res.clearCookie('token');
+    res.status(200).json({ success: true, message: 'Logged out successfully'});
+
+    console.log(`User successfully logout.`);
+  } catch(error: unknown) {
+    if (error instanceof Error) {
+      res.status(500).json({ success: false, message: error.message });
+    } else {
+      res
+        .status(500)
+        .json({ success: false, message: "An unknown error occurred" });
+    }
+
+    
+    console.log('Error in logout controller', error);
+  }
 };
 
 const signIn = async (req: Request, res: Response) => {
@@ -145,10 +164,10 @@ const signIn = async (req: Request, res: Response) => {
 
   } catch(error) {
     if (error instanceof Error) {
-      res.status(400).json({ success: false, message: error.message });
+      res.status(500).json({ success: false, message: error.message });
     } else {
       res
-        .status(400)
+        .status(500)
         .json({ success: false, message: "An unknown error occurred" });
     }
 
@@ -191,7 +210,7 @@ const resetPassword = async (req: Request, res: Response) => {
 		res.status(200).json({ success: true, message: "Password reset successful" });
 	} catch (error: any) {
 		console.log("Error in resetPassword ", error);
-		res.status(400).json({ success: false, message: error.message });
+		res.status(500).json({ success: false, message: error.message });
 	}
 };
 
@@ -277,10 +296,10 @@ const forgotPassword = async (req: Request, res: Response) => {
 
   } catch(error) {
     if (error instanceof Error) {
-      res.status(400).json({ success: false, message: error.message });
+      res.status(500).json({ success: false, message: error.message });
     } else {
       res
-        .status(400)
+        .status(500)
         .json({ success: false, message: "An unknown error occurred" });
     }
 
@@ -317,7 +336,7 @@ const checkAuth = async (req: CustomRequest, res: Response) => {
 
   } catch (error: any) {
     console.log("Error in checkAuth ", error);
-		res.status(400).json({ success: false, message: error.message });
+		res.status(500).json({ success: false, message: error.message });
   }
 }
 
