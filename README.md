@@ -8,7 +8,7 @@ This repository contains a full-stack web application with the following technol
 #### Front-end:
 <p align="left">
   <a>
-    <img src="https://skillicons.dev/icons?i=html,css,ts,react,redux" />
+    <img src="https://skillicons.dev/icons?i=html,tailwind,ts,react,redux" />
   </a>
 </p>
 
