@@ -5,6 +5,19 @@ This repository contains a full-stack web application with the following technol
 - **Server**: RESTful API built using TypeScript, Express, and MongoDB.
 - **Client**: Front-end application built using React(TypeScript).
 
+#### Front-end:
+<p align="left">
+  <a>
+    <img src="https://skillicons.dev/icons?i=html,css,ts,react,redux" />
+  </a>
+</p>
+
+#### Back-end:
+<p align="left">
+  <a>
+    <img src="https://skillicons.dev/icons?i=ts,nodejs,express,mongodb" />
+  </a>
+</p>
 
 ## Overview <a name="overview"></a>
 
