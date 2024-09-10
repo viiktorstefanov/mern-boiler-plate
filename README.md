@@ -197,16 +197,16 @@ for both server and client
 ## Front-End <a name="front-views"></a>
 
 ### Register
-<img src="sign-up.png" />
+<img src="img/sign-up.png" />
 
 ### Login
-<img src="login.png" />
+<img src="img/login.png" />
 
 ### Reset Password
-<img src="reset-password.png" />
+<img src="img/reset-password.png" />
 
 ### Verify Email
-<img src="verify-email.png" />
+<img src="img/verify-email.png" />
 
 ### Forgot Password
-<img src="forgot-password.png" />
+<img src="img/forgot-password.png" />
